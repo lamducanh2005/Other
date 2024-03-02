@@ -1,15 +1,36 @@
 import java.util.Scanner;
 
+/**
+ * Represents a solution for working with fractions.
+ */
 public class Solution {
-    private int numerator;
-    private int denominator;
+    private int numerator; // Numerator of the fraction
+    private int denominator; // Denominator of the fraction
 
     /**
-     * calculates gcd of two number.
+     * Constructs a fraction with a default denominator of 1.
+     */
+    public Solution() {
+        this.denominator = 1;
+    }
+
+    /**
+     * Constructs a fraction with the given numerator and denominator.
      *
-     * @param a is the 1st parameter
-     * @param b is the 2nd parameter
-     * @return
+     * @param numerator   the numerator of the fraction
+     * @param denominator the denominator of the fraction
+     */
+    public Solution(int numerator, int denominator) {
+        this.numerator = numerator;
+        setDenominator(denominator);
+    }
+
+    /**
+     * Calculates the greatest common divisor (GCD) of two numbers.
+     *
+     * @param a the first number
+     * @param b the second number
+     * @return the GCD of the two numbers
      */
     public int gcd(int a, int b) {
         a = Math.abs(a);
@@ -21,9 +42,9 @@ public class Solution {
     }
 
     /**
-     * tim uoc chung lon nhat.
+     * Reduces the fraction to its simplest form.
      *
-     * @return this
+     * @return this fraction after reduction
      */
     public Solution reduce() {
         int gcd = gcd(this.numerator, this.denominator);
@@ -33,10 +54,10 @@ public class Solution {
     }
 
     /**
-     * cong 2 phan so.
+     * Adds another fraction to this fraction.
      *
-     * @param fraction phan so khac
-     * @return
+     * @param fraction the other fraction to add
+     * @return the result of the addition as a new fraction
      */
     public Solution add(Solution fraction) {
         int num = this.numerator * fraction.denominator + this.denominator * fraction.numerator;
@@ -45,10 +66,10 @@ public class Solution {
     }
 
     /**
-     * tru 2 phan so.
+     * Subtracts another fraction from this fraction.
      *
-     * @param fraction phan so khac
-     * @return
+     * @param fraction the other fraction to subtract
+     * @return the result of the subtraction as a new fraction
      */
     public Solution subtract(Solution fraction) {
         int num = this.numerator * fraction.denominator - this.denominator * fraction.numerator;
@@ -57,10 +78,10 @@ public class Solution {
     }
 
     /**
-     * nhan 2 phan so.
+     * Multiplies this fraction by another fraction.
      *
-     * @param fraction phan so khac
-     * @return
+     * @param fraction the other fraction to multiply by
+     * @return the result of the multiplication as a new fraction
      */
     public Solution multiply(Solution fraction) {
         int num = this.numerator * fraction.numerator;
@@ -69,91 +90,65 @@ public class Solution {
     }
 
     /**
-     * chia 2 phan so.
+     * Divides this fraction by another fraction.
      *
-     * @param fraction phan so khac
-     * @return
+     * @param fraction the other fraction to divide by
+     * @return the result of the division as a new fraction
      */
     public Solution divide(Solution fraction) {
         int num = this.numerator * fraction.denominator;
         int den = this.denominator * fraction.numerator;
         return new Solution(num, den).reduce();
-
     }
 
     /**
-     * tranh mau bang 1.
-     */
-    public Solution() {
-        this.denominator = 1;
-    }
-
-    /**
-     * ham khoi tao phan so.
+     * Checks if this fraction is equal to another object.
      *
-     * @param numerator   tu so
-     * @param denominator mau so
+     * @param obj the object to compare with this fraction
+     * @return true if the objects are equal, false otherwise
      */
-    public Solution(int numerator, int denominator) {
-        this.numerator = numerator;
-        if (denominator != 0) {
-            this.denominator = denominator;
-        } else {
-            this.denominator = 1;
-        }
-    }
-
-    /**
-     * so sanh 2 phan so xem co bang nhau khong.
-     *
-     * @param obj object moi
-     * @return
-     */
+    @Override
     public boolean equals(Object obj) {
         if (obj instanceof Solution) {
             Solution other = (Solution) obj;
             Solution thisReduced = this.reduce();
             Solution otherReduced = other.reduce();
-            if (thisReduced.numerator == otherReduced.numerator && thisReduced.denominator == otherReduced.denominator) {
-                return true;
-            }
+            return thisReduced.numerator == otherReduced.numerator && thisReduced.denominator == otherReduced.denominator;
         }
         return false;
     }
 
     /**
-     * lay tu so ra.
+     * Gets the numerator of this fraction.
      *
-     * @param numerator tu so
-     * @return
+     * @return the numerator of this fraction
      */
-    public int getNumerator(int numerator) {
+    public int getNumerator() {
         return this.numerator;
     }
 
     /**
-     * lay mau so ra.
+     * Gets the denominator of this fraction.
      *
-     * @param denominator mau so
-     * @return
+     * @return the denominator of this fraction
      */
-    public int getDenominator(int denominator) {
+    public int getDenominator() {
         return this.denominator;
     }
 
     /**
-     * nhap tu so.
+     * Sets the numerator of this fraction.
      *
-     * @param numerator tu so
+     * @param numerator the new numerator value
      */
     public void setNumerator(int numerator) {
         this.numerator = numerator;
     }
 
     /**
-     * nhap mau so.
+     * Sets the denominator of this fraction, ensuring it is not zero.
      *
-     * @param denominator mau so
+     * @param denominator the new denominator value
      */
     public void setDenominator(int denominator) {
         if (denominator != 0) {
