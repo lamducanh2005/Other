@@ -40,7 +40,7 @@ public class Solution {
      */
     public Solution add(Solution fraction) {
         int num = this.numerator * fraction.denominator + this.denominator * fraction.numerator;
-        int den = this.numerator * this.denominator; // SAI
+        int den = this.denominator * fraction.denominator;
         return new Solution(num, den).reduce();
     }
 
@@ -52,7 +52,7 @@ public class Solution {
      */
     public Solution subtract(Solution fraction) {
         int num = this.numerator * fraction.denominator - this.denominator * fraction.numerator;
-        int den = this.numerator * this.denominator; // SAI
+        int den = this.denominator * fraction.denominator;
         return new Solution(num, den).reduce();
     }
 
@@ -63,8 +63,8 @@ public class Solution {
      * @return
      */
     public Solution multiply(Solution fraction) {
-        int num = this.numerator * fraction.numerator; 
-        int den = this.numerator * this.denominator; // SAI 
+        int num = this.numerator * fraction.numerator;
+        int den = this.denominator * fraction.denominator;
         return new Solution(num, den).reduce();
     }
 
@@ -74,10 +74,11 @@ public class Solution {
      * @param fraction phan so khac
      * @return
      */
-    public Solution divide(Solution fraction) { // THIẾU TRƯỜNG HỢP: NẾU PHÉP CHIA LÀ KHÔNG HỢP LỆ THÌ SAO?
+    public Solution divide(Solution fraction) {
         int num = this.numerator * fraction.denominator;
         int den = this.denominator * fraction.numerator;
         return new Solution(num, den).reduce();
+
     }
 
     /**
@@ -113,7 +114,7 @@ public class Solution {
             Solution other = (Solution) obj;
             Solution thisReduced = this.reduce();
             Solution otherReduced = other.reduce();
-            if (thisReduced.numerator == otherReduced.numerator && thisReduced.denominator == otherReduced.denominator) {  // CÓ THỂ SẼ BỊ LỖI TRÌNH BÀY VÌ QUÁ DÀI
+            if (thisReduced.numerator == otherReduced.numerator && thisReduced.denominator == otherReduced.denominator) {
                 return true;
             }
         }
@@ -158,7 +159,7 @@ public class Solution {
         if (denominator != 0) {
             this.denominator = denominator;
         } else {
-            this.denominator = 1; // KHI MẪU BẰNG 0 THÌ ĐỂ NGUYÊN, KHÔNG SET BẰNG 1
+            this.denominator = 1;
         }
     }
 }
