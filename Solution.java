@@ -4,14 +4,29 @@ public class Solution {
     private int numerator;
     private int denominator;
 
-    public Solution() {
+    // ĐỀ BÀI YÊU CẦU MẪU SỐ MẶC ĐỊNH KHI KHỞI TẠO LÀ 1
+    // HÀM KHỞI TẠO CHƯA THỰC SỰ CHẠY ĐÚNG VỚI YÊU CẦU ĐỀ BÀI
+
+    public Solution() { // NẾU KHỞI TẠO KHÔNG THAM SỐ, MẪU SỐ MỚI ĐƯỢC GÁN BẰNG 1
         this.denominator = 1;
     }
 
-    public Solution(int numerator, int denominator) {
+    public Solution(int numerator, int denominator) { // NẾU KHỞI TẠO CÓ THAM SỐ, MẪU KHÔNG ĐƯỢC GÁN BẰNG 1 TRONG TRƯỜNG HỢP KHÔNG HỢP LỆ
         this.numerator = numerator;
         setDenominator(denominator);
     }
+
+    /* Idea:
+
+    public Solution(int numerator, int denominator) {
+        this.numberator = numerator;
+        this.denominator = 1;
+        setDenominator(denominator);
+    }
+
+    */
+
+    
 
     public int gcd(int a, int b) {
         a = Math.abs(a);
@@ -47,7 +62,7 @@ public class Solution {
         return new Solution(num, den).reduce();
     }
 
-    public Solution divide(Solution fraction) {
+    public Solution divide(Solution fraction) { // CHƯA KIỂM TRA TÍNH HỢP LỆ CỦA PHÉP CHIA
         int num = this.numerator * fraction.denominator;
         int den = this.denominator * fraction.numerator;
         return new Solution(num, den).reduce();
@@ -73,7 +88,7 @@ public class Solution {
         this.numerator = numerator;
     }
 
-    public void setDenominator(int denominator) {
+    public void setDenominator(int denominator) { // NẾU MẪU SỐ BẰNG 0 THÌ KHÔNG LÀM GÌ CẢ, CHỨ KHÔNG PHẢI GÁN BẰNG 1
         if (denominator != 0) {
             this.denominator = denominator;
         } else {
